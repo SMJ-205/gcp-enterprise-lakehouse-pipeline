@@ -1,0 +1,32 @@
+{
+  "inspectConfig": {
+    "infoTypes": [
+      { "name": "EMAIL_ADDRESS" },
+      { "name": "PHONE_NUMBER" },
+      { "name": "INDONESIA_NIK" }
+    ],
+    "minLikelihood": "LIKELY",
+    "limits": {
+      "maxFindingsPerItem": 100
+    }
+  },
+  "deidentifyConfig": {
+    "infoTypeTransformations": {
+      "transformations": [
+        {
+          "infoTypes": [
+            { "name": "PHONE_NUMBER" },
+            { "name": "EMAIL_ADDRESS" }
+          ],
+          "primitiveTransformation": {
+            "characterMaskConfig": {
+              "maskingCharacter": "*",
+              "numberToMask": 4,
+              "reverseOrder": true
+            }
+          }
+        }
+      ]
+    }
+  }
+}

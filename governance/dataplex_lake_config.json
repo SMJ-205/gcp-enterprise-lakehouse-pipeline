@@ -1,0 +1,48 @@
+{
+  "lake": {
+    "name": "ecommerce-lakehouse",
+    "displayName": "E-Commerce Data Lakehouse",
+    "description": "Unified data governance for clickstream events and transactional logs",
+    "zones": [
+      {
+        "name": "raw-zone",
+        "displayName": "Raw Ingestion Zone",
+        "type": "RAW",
+        "resourceSpec": {
+          "locationType": "SINGLE_REGION"
+        },
+        "asset": {
+          "name": "bronze-gcs-bucket",
+          "displayName": "Bronze GCS Transaction Logs",
+          "resourceSpec": {
+            "name": "projects/gcp-pde-project-505510/buckets/gcp-pde-project-505510-bronze-lakehouse",
+            "type": "STORAGE_BUCKET"
+          },
+          "discoverySpec": {
+            "enabled": true,
+            "includePatterns": ["transactions/*.parquet"]
+          }
+        }
+      },
+      {
+        "name": "curated-zone",
+        "displayName": "Curated Analytical Zone",
+        "type": "CURATED",
+        "resourceSpec": {
+          "locationType": "SINGLE_REGION"
+        },
+        "asset": {
+          "name": "silver-gold-bq-dataset",
+          "displayName": "Silver and Gold BigQuery layers",
+          "resourceSpec": {
+            "name": "projects/gcp-pde-project-505510/datasets/ecommerce_lakehouse",
+            "type": "BIGQUERY_DATASET"
+          },
+          "discoverySpec": {
+            "enabled": false
+          }
+        }
+      }
+    ]
+  }
+}
